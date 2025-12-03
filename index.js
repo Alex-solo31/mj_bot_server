@@ -262,5 +262,6 @@ client.on('messageCreate', async (msg) => {
 // =========================
 client.login(DISCORD_TOKEN).catch((err) => {
   console.error('❌ Discord login error:', err);
-  process.exit(1);
+  // process.exit(1); // On bloque la mort du bot
 });
+
