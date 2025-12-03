@@ -20,13 +20,35 @@ const client = new Client({
   ]
 });
 
-// ---- PocketBase login ----
 async function pbLogin() {
-  const res = await axios.post(`${POCKETBASE_URL}/api/admins/auth-with-password`, {
-    identity: POCKETBASE_ADMIN,
-    password: POCKETBASE_PASS
-  });
-  return res.data.token;
+  if (!POCKETBASE_URL) {
+    console.error("❌ POCKETBASE_URL est vide ou non définie");
+    throw new Error("POCKETBASE_URL manquante");
+  }
+
+  // On nettoie l'URL au cas où il y ait un / en trop à la fin
+  const baseUrl = POCKETBASE_URL.replace(/\/+$/, "");
+  const url = `${baseUrl}/api/admins/auth-with-password`;
+
+  console.log("🔗 PB login URL utilisée :", url);
+
+  try {
+    const res = await axios.post(url, {
+      identity: POCKETBASE_ADMIN,
+      password: POCKETBASE_PASS,
+    });
+
+    console.log("✅ PocketBase login OK, status :", res.status);
+    return res.data.token;
+  } catch (err) {
+    console.error("💥 PocketBase login ERROR :", {
+      url,
+      status: err.response?.status,
+      data: err.response?.data,
+      message: err.message,
+    });
+    throw err;
+  }
 }
 
 // ---- When bot online ----
