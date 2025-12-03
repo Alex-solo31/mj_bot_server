@@ -42,7 +42,7 @@ client.on("messageCreate", async (msg) => {
 
   // GPT simple test
   const completion = await ai.chat.completions.create({
-    model: "gpt-4o-mini",
+    model: "gpt-5-mini",
     messages: [
       { role: "system", content: "Tu es un MJ chaleureux." },
       { role: "user", content: msg.content }
