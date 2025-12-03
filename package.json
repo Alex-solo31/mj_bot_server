@@ -1,0 +1,15 @@
+{
+  "name": "mj-bot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "openai": "latest",
+    "axios": "latest",
+    "ws": "latest",
+    "discord.js": "14.13.0"
+  }
+}
